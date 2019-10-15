@@ -13,6 +13,20 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-database.ref().on("value", function(snapshot) {
-    console.log("snapshot", snapshot.val());
-})
+var connectedRef = firebase.database().ref(".info/connected");
+connectedRef.on("value", function(snap) {
+  if (snap.val() === true) {
+    alert("connected");
+  } else {
+    alert("not connected");
+  }
+});
+
+// I need to pick up reading here: 
+// https://firebase.google.com/docs/database/web/offline-capabilities?authuser=1
+// 
+
+// I need to come up with a plan to Structure my Data. 
+// https://firebase.google.com/docs/database/web/structure-data?authuser=1
+
+
