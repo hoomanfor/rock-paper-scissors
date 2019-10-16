@@ -13,14 +13,38 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-var connectedRef = firebase.database().ref(".info/connected");
-connectedRef.on("value", function(snap) {
-  if (snap.val() === true) {
-    alert("connected");
-  } else {
-    alert("not connected");
-  }
+$("#p1-name-submit").on("click", function(event) {
+  event.preventDefault();
+  console.log("This Works!");
+  var playerOneName = $("[name*='p1-name']").val().trim(); 
+  console.log("playerOneName", playerOneName);
+  database.ref("players/one").set({
+    name: playerOneName,
+    selection: ""
+  });
+  $("[name*='p1-name']").val("SUBMITTED");
+
+  $("figure").on("click", function(event) {
+    var selection = $(this);
+    selection = selection[0].children[0].alt;
+    database.ref("players/one").set({
+      name: playerOneName,
+      selection: selection
+    });
+  });
 });
+
+// database.ref(".info/connected").on("value", function(snapshot) {
+
+//   console.log("snapshot.val()", snapshot.val());
+//   if (snapshot.val() == true) {
+//     database.ref("players").push({
+//       name: "Hooman"
+//     })
+//   } else {
+//     console.log("Not Connected")
+//   }
+// })
 
 // I need to pick up reading here: 
 // https://firebase.google.com/docs/database/web/offline-capabilities?authuser=1
