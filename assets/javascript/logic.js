@@ -56,6 +56,7 @@ $("#p1-name-submit").on("click", function(event) {
 
   $(document).on("click", "#p1-option", function(event) {
     var selection = $(this);
+    $(this).css("background-color", "green");
     selection = selection[0].children[0].alt;
     console.log("selection", selection);
     database.ref("players/one").set({
@@ -77,6 +78,7 @@ $("#p2-name-submit").on("click", function(event) {
 
   $(document).on("click", "#p2-option", function(event) {
     var selection = $(this);
+    $(this).css("background-color", "green");
     selection = selection[0].children[0].alt;
     database.ref("players/two").set({
       name: playerTwoName,

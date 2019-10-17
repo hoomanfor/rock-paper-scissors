@@ -10,16 +10,44 @@ header {
     font-size: 2rem;
 }
 
+main {
+    border: 1px solid black; 
+}
+
+.player-one,
+.player-two {
+    border: 1px solid black; 
+    width: 33.3%;
+    float: left; 
+}
+
 form {
-    padding: 10px 0 10px 0;
+    /* padding: 10px 0 10px 0; */
 }
 
 figure {
     border: 1px solid black;
-    display: inline-block;
-    cursor: pointer; 
+    float:left; 
+    /* width: 33.3%;  */
+    cursor: pointer;
 }
 
 figcaption {
     text-align: center; 
+}
+
+.chat-box {
+    border: 1px solid black; 
+    width: 33.3%;
+    float: left;
+}
+
+.message-input {
+    width: 80%; 
+}
+
+.message-display {
+    border: 1px solid black; 
+    height: 120px; 
+    background-color: white; 
 }
