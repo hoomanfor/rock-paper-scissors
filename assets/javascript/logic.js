@@ -13,26 +13,81 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
+function determineWinner() {
+  database.ref("players").on("value", function(snapshot) {
+    console.log("snapshot.val()", snapshot.val());
+    var playerOneSelection = snapshot.val().one.selection || "poop";
+    console.log("TEST!1", playerOneSelection);
+    var playerTwoSelection = snapshot.val().two.selection || "poop";
+    console.log("TEST!2", playerTwoSelection);
+    if (playerOneSelection === "rock" && playerTwoSelection === "rock") {
+      console.log("Rock & Rock = Tie")
+    } else if (playerOneSelection === "paper" && playerTwoSelection === "paper") {
+      console.log("Paper & Paper = Tie")
+    } else if (playerOneSelection === "scissors" && playerTwoSelection === "scissors") {
+      console.log("Scissors & Scissors = Tie")
+    } else if (playerOneSelection === "rock" && playerTwoSelection === "scissors") {
+      console.log("rock & scissors = Player One Wins!")
+    } else if (playerOneSelection === "rock" && playerTwoSelection === "paper") {
+      console.log("rock & paper = Player Two Wins!")
+    } else if (playerOneSelection === "scissors" && playerTwoSelection === "rock") {
+      console.log("scissors & rock = Player Two Wins!")
+    } else if (playerOneSelection === "scissors" && playerTwoSelection === "paper") {
+      console.log("scissors & paper = Player One Wins!")
+    } else if (playerOneSelection === "paper" && playerTwoSelection === "rock") {
+      console.log("paper & rock = Player One Wins!")
+    } else if (playerOneSelection === "paper" && playerTwoSelection === "scissors") {
+      console.log("paper & scissors = Player Two Wins!")
+    } else {
+      console.log("I don't know!")
+    }
+  })
+}
+
 $("#p1-name-submit").on("click", function(event) {
   event.preventDefault();
   console.log("This Works!");
   var playerOneName = $("[name*='p1-name']").val().trim(); 
   console.log("playerOneName", playerOneName);
   database.ref("players/one").set({
-    name: playerOneName,
-    selection: ""
+    name: playerOneName
   });
   $("[name*='p1-name']").val("SUBMITTED");
 
-  $("figure").on("click", function(event) {
+  $(document).on("click", "#p1-option", function(event) {
     var selection = $(this);
     selection = selection[0].children[0].alt;
+    console.log("selection", selection);
     database.ref("players/one").set({
       name: playerOneName,
       selection: selection
     });
   });
 });
+
+$("#p2-name-submit").on("click", function(event) {
+  event.preventDefault();
+  console.log("This Works!");
+  var playerTwoName = $("[name*='p2-name']").val().trim(); 
+  console.log("playerTwoName", playerTwoName);
+  database.ref("players/two").set({
+    name: playerTwoName
+  });
+  $("[name*='p2-name']").val("SUBMITTED");
+
+  $(document).on("click", "#p2-option", function(event) {
+    var selection = $(this);
+    selection = selection[0].children[0].alt;
+    database.ref("players/two").set({
+      name: playerTwoName,
+      selection: selection
+    });
+    determineWinner()
+  });
+});
+
+// database.ref("players").onDisconnect().remove()
+
 
 // database.ref(".info/connected").on("value", function(snapshot) {
 
