@@ -14,11 +14,11 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
 function determineWinner() {
-  database.ref("players").on("value", function(snapshot) {
+  database.ref("players").once("value", function(snapshot) {
     console.log("snapshot.val()", snapshot.val());
-    var playerOneSelection = snapshot.val().one.selection || "poop";
+    var playerOneSelection = snapshot.val().one.selection;
     console.log("TEST!1", playerOneSelection);
-    var playerTwoSelection = snapshot.val().two.selection || "poop";
+    var playerTwoSelection = snapshot.val().two.selection;
     console.log("TEST!2", playerTwoSelection);
     if (playerOneSelection === "rock" && playerTwoSelection === "rock") {
       console.log("Rock & Rock = Tie")
@@ -44,6 +44,39 @@ function determineWinner() {
   })
 }
 
+TODO: // Start back up here. Am I required to Set? 
+database.ref("players").on("value", function(snapshot) {
+  if (snapshot.exists()) {
+  if (snapshot.val().one.name !== "null") {
+    $("#player-one-name").html(snapshot.val().one.name);
+    $(document).on("click", "#p1-option", function(event) {
+      var selection = $(this);
+      $(this).css("background-color", "green");
+      selection = selection[0].children[0].alt;
+      console.log("selection", selection);
+      database.ref("players/one").set({
+        name: snapshot.val().one.name,
+        selection: selection
+      })
+    })
+  } 
+  if (snapshot.val().two.name !== "null") {
+    $("#player-two-name").html(snapshot.val().two.name);
+    $(document).on("click", "#p2-option", function(event) {
+      var selection = $(this);
+      $(this).css("background-color", "green");
+      selection = selection[0].children[0].alt;
+      database.ref("players/two").set({
+        name: snapshot.val().two.name,
+        selection: selection
+      })
+      determineWinner()
+    })
+  }
+}
+})
+
+
 $("#p1-name-submit").on("click", function(event) {
   event.preventDefault();
   console.log("This Works!");
@@ -51,19 +84,24 @@ $("#p1-name-submit").on("click", function(event) {
   console.log("playerOneName", playerOneName);
   database.ref("players/one").set({
     name: playerOneName
-  });
-  $("[name*='p1-name']").val("SUBMITTED");
+  })
 
-  $(document).on("click", "#p1-option", function(event) {
-    var selection = $(this);
-    $(this).css("background-color", "green");
-    selection = selection[0].children[0].alt;
-    console.log("selection", selection);
-    database.ref("players/one").set({
-      name: playerOneName,
-      selection: selection
-    });
-  });
+  database.ref("players/one").once("value", function(snapshot) {
+    var dbNameOne = snapshot.val().name;
+    console.log("dbNameOne", dbNameOne)
+    $("#player-one-name").html(dbNameOne);
+  })
+
+  // $(document).on("click", "#p1-option", function(event) {
+  //   var selection = $(this);
+  //   $(this).css("background-color", "green");
+  //   selection = selection[0].children[0].alt;
+  //   console.log("selection", selection);
+  //   database.ref("players/one").set({
+  //     name: playerOneName,
+  //     selection: selection
+  //   })
+  // })
 });
 
 $("#p2-name-submit").on("click", function(event) {
@@ -73,20 +111,26 @@ $("#p2-name-submit").on("click", function(event) {
   console.log("playerTwoName", playerTwoName);
   database.ref("players/two").set({
     name: playerTwoName
-  });
-  $("[name*='p2-name']").val("SUBMITTED");
+  })
+  
+  database.ref("players/two").once("value", function(snapshot) {
+    var dbNameTwo = snapshot.val().name;
+    console.log("dbNameTwo", dbNameTwo)
+    $("#player-two-name").html(dbNameTwo);
+  })
 
-  $(document).on("click", "#p2-option", function(event) {
-    var selection = $(this);
-    $(this).css("background-color", "green");
-    selection = selection[0].children[0].alt;
-    database.ref("players/two").set({
-      name: playerTwoName,
-      selection: selection
-    });
-    determineWinner()
-  });
+  // $(document).on("click", "#p2-option", function(event) {
+  //   var selection = $(this);
+  //   $(this).css("background-color", "green");
+  //   selection = selection[0].children[0].alt;
+  //   database.ref("players/two").set({
+  //     name: playerTwoName,
+  //     selection: selection
+  //   })
+  //   determineWinner()
+  // })
 });
+
 
 // database.ref("players").onDisconnect().remove()
 

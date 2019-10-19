@@ -20,10 +20,15 @@
       <main>
         <!-- Player One -->
         <div class="player-one">
-          <form>
-            Player 1's Name:
-            <input type="text" name="p1-name">
-            <input type="submit" id="p1-name-submit">
+          <form class="player-form">
+            <h2>Player 1</h2>
+            <div id="player-one-name">
+              Enter Your Name to Play
+              <br>
+              <input type="text" name="p1-name">
+              <br>
+              <input type="submit" id="p1-name-submit">
+            </div>
           </form>
             <figure id="p1-option">
               <img src="assets/images/rock_2.jpg" alt="rock">
@@ -48,10 +53,15 @@
         </div>
         <!-- Player Two -->
         <div class="player-two">
-          <form>
-            Player 2's Name:
-            <input type="text" name="p2-name">
-            <input type="submit" id="p2-name-submit">
+          <form class="player-form">
+            <h2>Player 2</h2>
+            <span id="player-two-name">
+              Enter Your Name to Play
+              <br>
+              <input type="text" name="p2-name">
+              <br>
+              <input type="submit" id="p2-name-submit">
+            </span>
           </form>
             <figure id="p2-option">
               <img src="assets/images/rock_2.jpg" alt="rock">
@@ -70,7 +80,7 @@
     </div>
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <!-- App Logic -->
     <script src="assets/javascript/logic.js"></script>
   </body>
