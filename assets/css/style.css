@@ -46,6 +46,7 @@ figcaption {
     border: 1px solid black; 
     width: 33.3%;
     float: left;
+    text-align: center; 
 }
 
 .message-input {
@@ -54,6 +55,22 @@ figcaption {
 
 .message-display {
     border: 1px solid black; 
-    height: 120px; 
+    height: 160px; 
     background-color: white; 
+}
+
+.scoreboards {
+    clear: both; 
+    border: 1px solid black; 
+}
+
+table {
+    margin: 0 auto; 
+}
+
+th,
+td {
+    border: 1px solid black; 
+    text-align: center; 
+    padding: .2rem;
 }

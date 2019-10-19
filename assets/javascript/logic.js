@@ -44,7 +44,28 @@ function determineWinner() {
   })
 }
 
+function p1EnterName() {
+  $("#player-one-name").html(
+    "Enter Your Name to Play" + 
+    "<br>" +
+    "<input type='text' class='name-input' name='p1-name'>" +
+    "<br>" +
+    "<input type='submit' class='name-submit' id='p1-name-submit'>"
+  );
+}
+
+function p2EnterName() {
+  $("#player-two-name").html(
+    "Enter Your Name to Play" + 
+    "<br>" +
+    "<input type='text' class='name-input' name='p2-name'>" +
+    "<br>" +
+    "<input type='submit' class='name-submit' id='p2-name-submit'>"
+  );
+}
+
 database.ref("players/one").on("value", function(snapshot) {
+  p1EnterName()
   if (snapshot.exists()) {
     if (snapshot.val().name !== "null") {
       $("#player-one-name").html(snapshot.val().name);
@@ -63,6 +84,7 @@ database.ref("players/one").on("value", function(snapshot) {
 })
 
 database.ref("players/two").on("value", function(snapshot) {
+  p2EnterName()
   if (snapshot.exists()) {
     if (snapshot.val().name !== "null") {
       $("#player-two-name").html(snapshot.val().name);
@@ -81,7 +103,7 @@ database.ref("players/two").on("value", function(snapshot) {
   }
 })
 
-$("#p1-name-submit").on("click", function(event) {
+$(document).on("click", "#p1-name-submit", function(event) {
   event.preventDefault();
   console.log("This Works!");
   var playerOneName = $("[name*='p1-name']").val().trim(); 
@@ -93,12 +115,12 @@ $("#p1-name-submit").on("click", function(event) {
     if (snapshot.exists()) {
       $("#p2-waiting").html("");
     } else {
-      $("#p1-waiting").html("Waiting for 'Player 2'");
+      $("#p1-waiting").html("Waiting for 'Player 2' to Join");
     }
   })
 });
 
-$("#p2-name-submit").on("click", function(event) {
+$(document).on("click", "#p2-name-submit", function(event) {
   event.preventDefault();
   console.log("This Works!");
   var playerTwoName = $("[name*='p2-name']").val().trim(); 
@@ -110,7 +132,7 @@ $("#p2-name-submit").on("click", function(event) {
     if (snapshot.exists()) {
       $("#p1-waiting").html("");
     } else {
-      $("#p2-waiting").html("Waiting for 'Player 1'");
+      $("#p2-waiting").html("Waiting for 'Player 1' to Join");
     }
   })
 });
