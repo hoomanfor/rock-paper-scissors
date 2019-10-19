@@ -44,36 +44,41 @@ function determineWinner() {
   })
 }
 
-TODO: // Start back up here. Am I required to Set? 
-database.ref("players").on("value", function(snapshot) {
+database.ref("players/one").on("value", function(snapshot) {
   if (snapshot.exists()) {
-  if (snapshot.val().one.name !== "null") {
-    $("#player-one-name").html(snapshot.val().one.name);
-    $(document).on("click", "#p1-option", function(event) {
-      var selection = $(this);
-      $(this).css("background-color", "green");
-      selection = selection[0].children[0].alt;
-      console.log("selection", selection);
-      database.ref("players/one").set({
-        name: snapshot.val().one.name,
-        selection: selection
+    if (snapshot.val().name !== "null") {
+      $("#player-one-name").html(snapshot.val().name);
+      $(document).on("click", "#p1-option", function(event) {
+        var selection = $(this);
+        $(this).css("background-color", "green");
+        selection = selection[0].children[0].alt;
+        console.log("selection", selection);
+        database.ref("players/one").set({
+          name: snapshot.val().name,
+          selection: selection
+        })
       })
-    })
-  } 
-  if (snapshot.val().two.name !== "null") {
-    $("#player-two-name").html(snapshot.val().two.name);
-    $(document).on("click", "#p2-option", function(event) {
-      var selection = $(this);
-      $(this).css("background-color", "green");
-      selection = selection[0].children[0].alt;
-      database.ref("players/two").set({
-        name: snapshot.val().two.name,
-        selection: selection
-      })
-      determineWinner()
-    })
+    } 
   }
-}
+})
+
+database.ref("players/two").on("value", function(snapshot) {
+  if (snapshot.exists()) {
+    if (snapshot.val().name !== "null") {
+      $("#player-two-name").html(snapshot.val().name);
+      $(document).on("click", "#p2-option", function(event) {
+        var selection = $(this);
+        $(this).css("background-color", "green");
+        selection = selection[0].children[0].alt;
+        console.log("selection", selection);
+        database.ref("players/two").set({
+          name: snapshot.val().name,
+          selection: selection
+        })
+        determineWinner()
+      })
+    } 
+  }
 })
 
 
@@ -85,23 +90,6 @@ $("#p1-name-submit").on("click", function(event) {
   database.ref("players/one").set({
     name: playerOneName
   })
-
-  database.ref("players/one").once("value", function(snapshot) {
-    var dbNameOne = snapshot.val().name;
-    console.log("dbNameOne", dbNameOne)
-    $("#player-one-name").html(dbNameOne);
-  })
-
-  // $(document).on("click", "#p1-option", function(event) {
-  //   var selection = $(this);
-  //   $(this).css("background-color", "green");
-  //   selection = selection[0].children[0].alt;
-  //   console.log("selection", selection);
-  //   database.ref("players/one").set({
-  //     name: playerOneName,
-  //     selection: selection
-  //   })
-  // })
 });
 
 $("#p2-name-submit").on("click", function(event) {
@@ -112,28 +100,10 @@ $("#p2-name-submit").on("click", function(event) {
   database.ref("players/two").set({
     name: playerTwoName
   })
-  
-  database.ref("players/two").once("value", function(snapshot) {
-    var dbNameTwo = snapshot.val().name;
-    console.log("dbNameTwo", dbNameTwo)
-    $("#player-two-name").html(dbNameTwo);
-  })
-
-  // $(document).on("click", "#p2-option", function(event) {
-  //   var selection = $(this);
-  //   $(this).css("background-color", "green");
-  //   selection = selection[0].children[0].alt;
-  //   database.ref("players/two").set({
-  //     name: playerTwoName,
-  //     selection: selection
-  //   })
-  //   determineWinner()
-  // })
 });
 
 
 // database.ref("players").onDisconnect().remove()
-
 
 // database.ref(".info/connected").on("value", function(snapshot) {
 
@@ -146,10 +116,6 @@ $("#p2-name-submit").on("click", function(event) {
 //     console.log("Not Connected")
 //   }
 // })
-
-// I need to pick up reading here: 
-// https://firebase.google.com/docs/database/web/offline-capabilities?authuser=1
-// 
 
 // I need to come up with a plan to Structure my Data. 
 // https://firebase.google.com/docs/database/web/structure-data?authuser=1
