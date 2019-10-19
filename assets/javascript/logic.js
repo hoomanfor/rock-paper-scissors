@@ -81,7 +81,6 @@ database.ref("players/two").on("value", function(snapshot) {
   }
 })
 
-
 $("#p1-name-submit").on("click", function(event) {
   event.preventDefault();
   console.log("This Works!");
@@ -89,6 +88,13 @@ $("#p1-name-submit").on("click", function(event) {
   console.log("playerOneName", playerOneName);
   database.ref("players/one").set({
     name: playerOneName
+  })
+  database.ref("players/two").once("value", function(snapshot) {
+    if (snapshot.exists()) {
+      $("#p2-waiting").html("");
+    } else {
+      $("#p1-waiting").html("Waiting for 'Player 2'");
+    }
   })
 });
 
@@ -99,6 +105,13 @@ $("#p2-name-submit").on("click", function(event) {
   console.log("playerTwoName", playerTwoName);
   database.ref("players/two").set({
     name: playerTwoName
+  })
+  database.ref("players/one").once("value", function(snapshot) {
+    if (snapshot.exists()) {
+      $("#p1-waiting").html("");
+    } else {
+      $("#p2-waiting").html("Waiting for 'Player 1'");
+    }
   })
 });
 
