@@ -151,6 +151,9 @@ function p1Selector() {
         database.ref("players/two/selection").once("value", function(snapshot) {
           if (snapshot.val() !== "null") {
             determineWinner()
+          } else {
+            $("#p1-waiting").html("Waiting for Player 2 to Make a Selection!")
+            // $("#p2-waiting").html("Player 1 is waiting for you to Make a Selection!")
           }
         })
       })
@@ -174,6 +177,9 @@ function p2Selector() {
         database.ref("players/one/selection").once("value", function(snapshot) {
           if (snapshot.val() !== "null") {
             determineWinner()
+          } else {
+            $("#p2-waiting").html("Waiting for Player 1 to Make a Selection!")
+            // $("#p1-waiting").html("Player 2 is waiting for you to Make a Selection!")
           }
         })
       })
@@ -210,7 +216,7 @@ database.ref("players/one").on("value", function(snapshot) {
     $("#p1-win").html(snapshot.val().win);
     $("#p1-tie").html(snapshot.val().tie);
     $("#p1-loss").html(snapshot.val().loss);
-    database.ref("players/two").on("value", function(snapshot) {
+    database.ref("players/two").once("value", function(snapshot) {
       if (snapshot.exists()) {
         $("#p2-waiting").html("");
       } else {
@@ -226,7 +232,7 @@ database.ref("players/two").on("value", function(snapshot) {
     $("#p2-win").html(snapshot.val().win);
     $("#p2-tie").html(snapshot.val().tie);
     $("#p2-loss").html(snapshot.val().loss);
-    database.ref("players/one").on("value", function(snapshot) {
+    database.ref("players/one").once("value", function(snapshot) {
       if (snapshot.exists()) {
         $("#p1-waiting").html("");
       } else {
@@ -235,13 +241,6 @@ database.ref("players/two").on("value", function(snapshot) {
     })
   }
 })
-
-// database.ref("players").on("value", function(snapshot) {
-//   if (snapshot.exists()) {
-//     console.log("LOOK HERE =>", snapshot.key);
-//   }
-// })
-
 
 $(document).on("click", "#p1-name-submit", function(event) {
   $("#p2-waiting").html("");
@@ -276,9 +275,6 @@ $(document).on("click", "#p2-name-submit", function(event) {
   p2Selector()
   database.ref("players/two").onDisconnect().remove()
 });
-
-
-
 
 
 
