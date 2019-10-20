@@ -210,6 +210,13 @@ database.ref("players/one").on("value", function(snapshot) {
     $("#p1-win").html(snapshot.val().win);
     $("#p1-tie").html(snapshot.val().tie);
     $("#p1-loss").html(snapshot.val().loss);
+    database.ref("players/two").on("value", function(snapshot) {
+      if (snapshot.exists()) {
+        $("#p2-waiting").html("");
+      } else {
+        $("#p1-waiting").html("Waiting for Player 2 to Join!")
+      }
+    })
   }
 })
 
@@ -219,8 +226,21 @@ database.ref("players/two").on("value", function(snapshot) {
     $("#p2-win").html(snapshot.val().win);
     $("#p2-tie").html(snapshot.val().tie);
     $("#p2-loss").html(snapshot.val().loss);
+    database.ref("players/one").on("value", function(snapshot) {
+      if (snapshot.exists()) {
+        $("#p1-waiting").html("");
+      } else {
+        $("#p2-waiting").html("Waiting for Player 1 to Join!")
+      }
+    })
   }
 })
+
+// database.ref("players").on("value", function(snapshot) {
+//   if (snapshot.exists()) {
+//     console.log("LOOK HERE =>", snapshot.key);
+//   }
+// })
 
 
 $(document).on("click", "#p1-name-submit", function(event) {
