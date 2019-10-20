@@ -187,6 +187,9 @@ p2Selector()
 database.ref("players/one").on("value", function(snapshot) {
   if (!snapshot.exists()) {
     console.log("No Player One!");
+    $("#p1-win").html("0");
+    $("#p1-tie").html("0");
+    $("#p1-loss").html("0");
     p1EnterName()
   }
 })
@@ -194,6 +197,9 @@ database.ref("players/one").on("value", function(snapshot) {
 database.ref("players/two").on("value", function(snapshot) {
   if (!snapshot.exists()) {
     console.log("No Player Two!");
+    $("#p2-win").html("0");
+    $("#p2-tie").html("0");
+    $("#p2-loss").html("0");
     p2EnterName()
   }
 })
@@ -216,7 +222,9 @@ database.ref("players/two").on("value", function(snapshot) {
   }
 })
 
+
 $(document).on("click", "#p1-name-submit", function(event) {
+  $("#p2-waiting").html("");
   event.preventDefault();
   console.log("This Works!");
   var playerOneName = $("[name*='p1-name']").val().trim(); 
@@ -229,16 +237,11 @@ $(document).on("click", "#p1-name-submit", function(event) {
     loss: 0
   })
   p1Selector()
-  // database.ref("players/two").once("value", function(snapshot) {
-  //   if (snapshot.exists()) {
-  //     $("#p2-waiting").html("");
-  //   } else {
-  //     $("#p1-waiting").html("Waiting for 'Player 2' to Join");
-  //   }
-  // })
+  database.ref("players/one").onDisconnect().remove()
 });
 
 $(document).on("click", "#p2-name-submit", function(event) {
+  $("#p1-waiting").html("");
   event.preventDefault();
   console.log("This Works!");
   var playerTwoName = $("[name*='p2-name']").val().trim(); 
@@ -251,15 +254,34 @@ $(document).on("click", "#p2-name-submit", function(event) {
     loss: 0
   })
   p2Selector()
-  // database.ref("players/one").once("value", function(snapshot) {
-  //   if (snapshot.exists()) {
-  //     $("#p1-waiting").html("");
-  //   } else {
-  //     $("#p2-waiting").html("Waiting for 'Player 1' to Join");
-  //   }
-  // })
+  database.ref("players/two").onDisconnect().remove()
 });
 
+
+
+
+
+
+// ----
+// database.ref("players/two").on("value", function(snapshot) {
+//   if (snapshot.exists()) {
+//     $("#p2-waiting").html("");
+//   } else {
+//     $("#p1-waiting").html("Waiting for 'Player 2'");
+//   }
+// })
+// ----
+
+// ----
+// database.ref(".info/connected").once("value", function(snapshot) {
+//   if (snapshot.val()) {
+//     var con = database.ref("connections").push({
+//       name: playerTwoName
+//     })
+//     con.onDisconnect().remove()
+//   }
+// })
+// ----
 
 // database.ref("players").onDisconnect().remove()
 
