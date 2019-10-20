@@ -135,47 +135,54 @@ function p2Win() {
   })
 }
 
-database.ref("players/one").once("value", function(snapshot) {
-  if (snapshot.exists()) {
-    $("#player-one-name").html(snapshot.val().name);
-    $(document).on("click", "#p1-option", function(event) {
-      var selection = $(this);
-      $(this).css("background-color", "green");
-      selection = selection[0].children[0].alt;
-      console.log("selection", selection);
-      database.ref("players/one").update({
-        name: snapshot.val().name,
-        selection: selection
+function p1Selector() {
+  database.ref("players/one").once("value", function(snapshot) {
+    if (snapshot.exists()) {
+      $("#player-one-name").html(snapshot.val().name);
+      $(document).on("click", "#p1-option", function(event) {
+        var selection = $(this);
+        $(this).css("background-color", "green");
+        selection = selection[0].children[0].alt;
+        console.log("selection", selection);
+        database.ref("players/one").update({
+          name: snapshot.val().name,
+          selection: selection
+        })
+        database.ref("players/two/selection").once("value", function(snapshot) {
+          if (snapshot.val() !== "null") {
+            determineWinner()
+          }
+        })
       })
-      database.ref("players/two/selection").once("value", function(snapshot) {
-        if (snapshot.val() !== "null") {
-          determineWinner()
-        }
-      })
-    })
-  }
-})
+    }
+  })
+}
 
-database.ref("players/two").once("value", function(snapshot) {
-  if (snapshot.exists()) {
-    $("#player-two-name").html(snapshot.val().name);
-    $(document).on("click", "#p2-option", function(event) {
-      var selection = $(this);
-      $(this).css("background-color", "green");
-      selection = selection[0].children[0].alt;
-      console.log("selection", selection);
-      database.ref("players/two").update({
-        name: snapshot.val().name,
-        selection: selection
+function p2Selector() {
+  database.ref("players/two").once("value", function(snapshot) {
+    if (snapshot.exists()) {
+      $("#player-two-name").html(snapshot.val().name);
+      $(document).on("click", "#p2-option", function(event) {
+        var selection = $(this);
+        $(this).css("background-color", "green");
+        selection = selection[0].children[0].alt;
+        console.log("selection", selection);
+        database.ref("players/two").update({
+          name: snapshot.val().name,
+          selection: selection
+        })
+        database.ref("players/one/selection").once("value", function(snapshot) {
+          if (snapshot.val() !== "null") {
+            determineWinner()
+          }
+        })
       })
-      database.ref("players/one/selection").once("value", function(snapshot) {
-        if (snapshot.val() !== "null") {
-          determineWinner()
-        }
-      })
-    })
-  }
-})
+    }
+  })
+}
+
+p1Selector()
+p2Selector()
 
 database.ref("players/one").on("value", function(snapshot) {
   if (!snapshot.exists()) {
@@ -221,6 +228,7 @@ $(document).on("click", "#p1-name-submit", function(event) {
     tie: 0,
     loss: 0
   })
+  p1Selector()
   // database.ref("players/two").once("value", function(snapshot) {
   //   if (snapshot.exists()) {
   //     $("#p2-waiting").html("");
@@ -242,6 +250,7 @@ $(document).on("click", "#p2-name-submit", function(event) {
     tie: 0,
     loss: 0
   })
+  p2Selector()
   // database.ref("players/one").once("value", function(snapshot) {
   //   if (snapshot.exists()) {
   //     $("#p1-waiting").html("");
