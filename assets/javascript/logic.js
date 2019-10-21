@@ -26,7 +26,6 @@ function determineWinner() {
     p1Losses = snapshot.val().one.loss;
     p2Losses = snapshot.val().two.loss;
     ties = snapshot.val().one.tie;
-    $("figure").css("background-color", "");
     console.log("snapshot.val()", snapshot.val());
     var playerOneSelection = snapshot.val().one.selection;
     console.log("TEST!1", playerOneSelection);
@@ -153,7 +152,6 @@ function p1Selector() {
             determineWinner()
           } else {
             $("#p1-waiting").html("Waiting for Player 2 to Make a Selection!")
-            // $("#p2-waiting").html("Player 1 is waiting for you to Make a Selection!")
           }
         })
       })
@@ -179,7 +177,6 @@ function p2Selector() {
             determineWinner()
           } else {
             $("#p2-waiting").html("Waiting for Player 1 to Make a Selection!")
-            // $("#p1-waiting").html("Player 2 is waiting for you to Make a Selection!")
           }
         })
       })
@@ -242,6 +239,16 @@ database.ref("players/two").on("value", function(snapshot) {
   }
 })
 
+
+database.ref("players").on("value", function(snapshot) {
+  if (snapshot.numChildren() === 2) {
+    console.log(snapshot.val());
+    if (snapshot.val().one.selection !== "null" && snapshot.val().two.selection !== "null") {
+      $("figure").css("background-color", "");
+    }
+  }
+})
+
 $(document).on("click", "#p1-name-submit", function(event) {
   $("#p2-waiting").html("");
   event.preventDefault();
@@ -275,6 +282,8 @@ $(document).on("click", "#p2-name-submit", function(event) {
   p2Selector()
   database.ref("players/two").onDisconnect().remove()
 });
+
+
 
 
 
