@@ -246,6 +246,12 @@ database.ref("players").on("value", function(snapshot) {
     if (snapshot.val().one.selection !== "null" && snapshot.val().two.selection !== "null") {
       $("figure").css("background-color", "");
     }
+    if (snapshot.val().one.selection === "null" && snapshot.val().two.selection !== "null") {
+      $("#p1-waiting").html("Player 2 is Waiting for you to Make a Selection!")
+    }
+    if (snapshot.val().one.selection !== "null" && snapshot.val().two.selection === "null") {
+      $("#p2-waiting").html("Player 1 is Waiting for you to Make a Selection!")
+    }
   }
 })
 
