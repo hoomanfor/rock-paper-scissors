@@ -33,12 +33,16 @@ main {
 
 figure {
     border: 1px solid black;
-    float:left; 
+    display: inline-block; 
     cursor: pointer;
-    margin-left: 7px; 
+    margin: 0; 
 }
 
 figcaption {
+    text-align: center; 
+}
+
+.figure-container {
     text-align: center; 
 }
 
