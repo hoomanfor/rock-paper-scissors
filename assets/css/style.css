@@ -60,7 +60,8 @@ figcaption {
 .message-display {
     border: 1px solid black; 
     height: 160px; 
-    background-color: white; 
+    background-color: white;
+    /* overflow: scroll;  */
 }
 
 .scoreboards {

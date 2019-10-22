@@ -255,6 +255,14 @@ database.ref("players").on("value", function(snapshot) {
   }
 })
 
+database.ref("messages").orderByChild("date_added").on("child_added", function(snapshot) {
+  console.log("messages", snapshot.val());
+  console.log("")
+  var playerMessage = snapshot.val().name + ": " + snapshot.val().message + "<br>"
+  console.log("LOOK!!!!=>", playerMessage);
+  $(".message-display").append(playerMessage);
+})
+
 $(document).on("click", "#p1-name-submit", function(event) {
   $("#p2-waiting").html("");
   event.preventDefault();
@@ -267,6 +275,18 @@ $(document).on("click", "#p1-name-submit", function(event) {
     win: 0,
     tie: 0,
     loss: 0
+  })
+  $(document).on("click", "#message-submit", function(event) {
+    event.preventDefault();
+    console.log("This Works!");
+    console.log("messanger playerOneName", playerOneName)
+    var message = $(".message-input").val().trim();
+    database.ref("messages").push({
+      name: playerOneName,
+      message: message,
+      date_added: firebase.database.ServerValue.TIMESTAMP
+    })
+    $(".message-input").val("");
   })
   p1Selector()
   database.ref("players/one").onDisconnect().remove()
