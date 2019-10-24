@@ -7,29 +7,39 @@ body {
 }
 
 .container {
+    border: 1px dashed blue; 
     width: 80%;
     margin: 0 auto; 
 }
 
 header {
-    font-size: 2.4rem;
+    display: inline-block; 
+    font-size: 4rem;
     font-family: 'Fascinate Inline', cursive;
+    text-align: right; 
+}
+
+li {
+    border: 1px solid green; 
 }
 
 main {
-    border: 1px solid black; 
-    overflow: auto; 
+    border: 1px solid black;
+    display: block; 
+    text-align: center; 
 }
 
 .player-one,
 .player-two {
+    display: inline-block; 
     border: 1px solid black; 
-    width: 33.3%;
-    float: left; 
+    text-align: right; 
+
 }
 
 .player-form {
-    text-align: center; 
+    font-size: 1.2rem;
+    font-family: 'Dosis', sans-serif;
 }
 
 figure {

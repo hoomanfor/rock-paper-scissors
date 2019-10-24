@@ -84,7 +84,6 @@ function p1EnterName() {
     "Enter Your Name to Play" + 
     "<br>" +
     "<input type='text' class='name-input' name='p1-name'>" +
-    "<br>" +
     "<input type='submit' class='name-submit' id='p1-name-submit'>"
   );
 }
@@ -94,7 +93,6 @@ function p2EnterName() {
     "Enter Your Name to Play" + 
     "<br>" +
     "<input type='text' class='name-input' name='p2-name'>" +
-    "<br>" +
     "<input type='submit' class='name-submit' id='p2-name-submit'>"
   );
 }
