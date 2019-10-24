@@ -12,7 +12,8 @@ body {
 }
 
 header {
-    font-size: 2rem;
+    font-size: 2.4rem;
+    font-family: 'Fascinate Inline', cursive;
 }
 
 main {
@@ -80,3 +81,12 @@ td {
     text-align: center; 
     padding: .2rem;
 }
+
+/* Google Fonts
+----
+font-family: 'Fascinate Inline', cursive;
+font-family: 'Dosis', sans-serif;
+font-family: 'Cabin', sans-serif;
+font-family: 'Dancing Script', cursive;
+font-family: 'Teko', sans-serif;
+---- */

@@ -314,6 +314,18 @@ $(document).on("click", "#p2-name-submit", function(event) {
     tie: 0,
     loss: 0
   })
+  $(document).on("click", "#message-submit", function(event) {
+    event.preventDefault();
+    console.log("This Works!");
+    console.log("messanger playerTwoName", playerTwoName)
+    var message = $(".message-input").val().trim();
+    database.ref("messages").push({
+      name: playerTwoName,
+      message: message,
+      date_added: firebase.database.ServerValue.TIMESTAMP
+    })
+    $(".message-input").val("");
+  })
   p2Selector()
   database.ref("players/two").onDisconnect().remove()
 });
