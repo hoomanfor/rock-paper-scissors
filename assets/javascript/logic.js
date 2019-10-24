@@ -19,6 +19,12 @@ var p1Losses = 0
 var p2Losses = 0
 var ties = 0;
 
+var mContainer = document.getElementById("message-display");
+
+function scrollToBottom() {
+  mContainer.scrollTop = mContainer.scrollHeight;
+}
+
 function determineWinner() {
   database.ref("players").once("value", function(snapshot) {
     p1Wins = snapshot.val().one.win;
@@ -258,9 +264,12 @@ database.ref("players").on("value", function(snapshot) {
 database.ref("messages").orderByChild("date_added").on("child_added", function(snapshot) {
   console.log("messages", snapshot.val());
   console.log("")
-  var playerMessage = snapshot.val().name + ": " + snapshot.val().message + "<br>"
+  // var shouldScroll = mContainer.scrollTop + mContainer.clientHeight === mContainer.scrollHeight;
+  var playerMessage = "<div class='message'>" + snapshot.val().name + ": " + snapshot.val().message + "</div>";
   console.log("LOOK!!!!=>", playerMessage);
-  $(".message-display").append(playerMessage);
+  $("#message-display").append(playerMessage);
+  // if (!shouldScroll) {}
+  scrollToBottom();
 })
 
 $(document).on("click", "#p1-name-submit", function(event) {

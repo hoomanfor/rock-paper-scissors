@@ -57,11 +57,12 @@ figcaption {
     width: 80%; 
 }
 
-.message-display {
+#message-display {
     border: 1px solid black; 
-    height: 160px; 
+    height: 100px; 
     background-color: white;
-    /* overflow: scroll;  */
+    text-align: left; 
+    overflow-y: auto; 
 }
 
 .scoreboards {
