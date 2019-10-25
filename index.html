@@ -18,8 +18,6 @@
   <body>
 
     <div class="container">
-      
-
       <main>
         <header>
           <ul>
@@ -73,7 +71,48 @@
           </div>
         </div>
       </main>
+
+      <section>
+        <!-- Scoreboard -->
+        <div class="scoreboard">
+          <div class="sb-header">
+            Scoreboard
+          </div>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Win</th>
+              <th>Loss</th>
+              <th>Tie</th>
+            </tr>
+            <tr>
+              <td>Player 1</td>
+              <td class="numbers" id="p1-win">0</td>
+              <td class="numbers" id="p1-loss">0</td>
+              <td class="numbers" id="p1-tie">0</td>
+            </tr>
+            <tr>
+              <td>Player 2</td>
+              <td class="numbers" id="p2-win">0</td>
+              <td class="numbers" id="p2-tie">0</td> 
+              <td class="numbers" id="p2-loss">0</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Messenger -->
+        <div class="chat-box">
+          <div id="message-display"></div>
+          <form>
+            <div class=".message-input-container">
+              <input type="text" name="message-input" class="message-input"><input type="submit" id="message-submit" value="Send">
+            </div>
+          </form>
+        </div>
+      </section>
+
     </div>
+
 
 <!-- Player 1 Scoreboard -->
 <!-- <div class="scoreboards">

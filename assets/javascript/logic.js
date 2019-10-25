@@ -83,8 +83,10 @@ function p1EnterName() {
   $("#player-one-name").html(
     "Enter Your Name to Play" + 
     "<br>" +
+    "<div class='input-container'>" + 
     "<input type='text' class='name-input' name='p1-name'>" +
-    "<input type='submit' class='name-submit' id='p1-name-submit'>"
+    "<input type='submit' class='name-submit' id='p1-name-submit'>" +
+    "</div>"
   );
 }
 
@@ -92,8 +94,10 @@ function p2EnterName() {
   $("#player-two-name").html(
     "Enter Your Name to Play" + 
     "<br>" +
+    "<div class='input-container'>" + 
     "<input type='text' class='name-input' name='p2-name'>" +
-    "<input type='submit' class='name-submit' id='p2-name-submit'>"
+    "<input type='submit' class='name-submit' id='p2-name-submit'>" +
+    "</div>"
   );
 }
 
