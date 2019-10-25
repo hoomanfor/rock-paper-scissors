@@ -118,6 +118,8 @@ function tie() {
   database.ref("players/two").update({
     tie: ties
   });
+  // $("#p1-waiting").html("You have Tied with Player 2. Make a New Selection!")
+  // $("#p2-waiting").html("You have Tied with Player 1. Make a New Selection!")
 }
 
 function p1Win() {
@@ -129,6 +131,8 @@ function p1Win() {
   database.ref("players/two").update({
     loss: p2Losses
   })
+  // $("#p1-waiting").html("You Won. Make a new Selection!")
+  // $("#p2-waiting").html("You Lost. Make a new Selection!")
 }
 
 function p2Win() {
@@ -140,6 +144,8 @@ function p2Win() {
   database.ref("players/two").update({
     win: p2Wins
   })
+  // $("#p1-waiting").html("You Lost. Make a New Selection!")
+  // $("#p2-waiting").html("You Won. Make a New Selection!")
 }
 
 function p1Selector() {
@@ -225,7 +231,7 @@ database.ref("players/one").on("value", function(snapshot) {
       if (snapshot.exists()) {
         $("#p2-waiting").html("");
       } else {
-        $("#p1-waiting").html("Waiting for Player 2 to Join!")
+        $("#p1-waiting").html("Waiting for Player 2 to Join!");
       }
     })
   }
@@ -233,7 +239,6 @@ database.ref("players/one").on("value", function(snapshot) {
 
 database.ref("players/two").on("value", function(snapshot) {
   if (snapshot.exists()) {
-    $("#player-two-name").html(snapshot.val().name);
     $("#p2-win").html(snapshot.val().win);
     $("#p2-tie").html(snapshot.val().tie);
     $("#p2-loss").html(snapshot.val().loss);
@@ -276,6 +281,7 @@ database.ref("messages").orderByChild("date_added").on("child_added", function(s
 
 $(document).on("click", "#p1-name-submit", function(event) {
   $("#p2-waiting").html("");
+  $(".player-two").css("display", "none");
   event.preventDefault();
   console.log("This Works!");
   var playerOneName = $("[name*='p1-name']").val().trim(); 
@@ -305,6 +311,7 @@ $(document).on("click", "#p1-name-submit", function(event) {
 
 $(document).on("click", "#p2-name-submit", function(event) {
   $("#p1-waiting").html("");
+  $(".player-one").css("display", "none");
   event.preventDefault();
   console.log("This Works!");
   var playerTwoName = $("[name*='p2-name']").val().trim(); 
