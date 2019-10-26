@@ -12,6 +12,13 @@ body {
     margin: 0 auto; 
 }
 
+.banner {
+    background-color: white; 
+    text-align: center; 
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.6rem;
+}
+
 header {
     border: 1px dashed red; 
     display: inline-block; 
@@ -30,6 +37,11 @@ h2 {
     font-family: 'Cabin', sans-serif;
 }
 
+h3 {
+    color: green; 
+    font-size: 1.2rem; 
+}
+
 main {
     border: 1px solid black;
     display: block; 
@@ -44,8 +56,13 @@ main {
 
 }
 
+#player-one-name,
+#player-two-name {
+    font-size: 1.3rem; 
+}
+
 .player-form {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-family: 'Dosis', sans-serif;
     padding: 5px 5px 5px 5px; 
 }
@@ -169,6 +186,7 @@ td {
 
 .message-input {
     width: 90%;
+    text-align: left; 
 }
 
 #message-submit {

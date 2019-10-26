@@ -118,8 +118,6 @@ function tie() {
   database.ref("players/two").update({
     tie: ties
   });
-  // $("#p1-waiting").html("You have Tied with Player 2. Make a New Selection!")
-  // $("#p2-waiting").html("You have Tied with Player 1. Make a New Selection!")
 }
 
 function p1Win() {
@@ -131,8 +129,6 @@ function p1Win() {
   database.ref("players/two").update({
     loss: p2Losses
   })
-  // $("#p1-waiting").html("You Won. Make a new Selection!")
-  // $("#p2-waiting").html("You Lost. Make a new Selection!")
 }
 
 function p2Win() {
@@ -144,8 +140,6 @@ function p2Win() {
   database.ref("players/two").update({
     win: p2Wins
   })
-  // $("#p1-waiting").html("You Lost. Make a New Selection!")
-  // $("#p2-waiting").html("You Won. Make a New Selection!")
 }
 
 function p1Selector() {
@@ -169,6 +163,12 @@ function p1Selector() {
           }
         })
       })
+      // database.ref("players/one/selection").once("value", function(snapshot) {
+      //   if (snapshot.val() !== "null") {
+      //     console.log("cats")
+      //     $(document).off("click", "#p1-option")
+      //   }
+      // })
     }
   })
 }
@@ -224,6 +224,7 @@ database.ref("players/two").on("value", function(snapshot) {
 database.ref("players/one").on("value", function(snapshot) {
   if (snapshot.exists()) {
     $("#player-one-name").html(snapshot.val().name);
+    $("#sb-p1-name").html(snapshot.val().name);
     $("#p1-win").html(snapshot.val().win);
     $("#p1-tie").html(snapshot.val().tie);
     $("#p1-loss").html(snapshot.val().loss);
@@ -234,11 +235,15 @@ database.ref("players/one").on("value", function(snapshot) {
         $("#p1-waiting").html("Waiting for Player 2 to Join!");
       }
     })
+  } else {
+    $("#sb-p1-name").html("Player 1");
   }
 })
 
 database.ref("players/two").on("value", function(snapshot) {
   if (snapshot.exists()) {
+    $("#player-two-name").html(snapshot.val().name);
+    $("#sb-p2-name").html(snapshot.val().name);
     $("#p2-win").html(snapshot.val().win);
     $("#p2-tie").html(snapshot.val().tie);
     $("#p2-loss").html(snapshot.val().loss);
@@ -249,6 +254,8 @@ database.ref("players/two").on("value", function(snapshot) {
         $("#p2-waiting").html("Waiting for Player 1 to Join!")
       }
     })
+  } else {
+    $("#sb-p2-name").html("Player 2");
   }
 })
 
@@ -260,10 +267,47 @@ database.ref("players").on("value", function(snapshot) {
       $("figure").css("background-color", "");
     }
     if (snapshot.val().one.selection === "null" && snapshot.val().two.selection !== "null") {
-      $("#p1-waiting").html("Player 2 is Waiting for you to Make a Selection!")
+      $("#p1-waiting").html("Player 2 is Waiting for you to Make a Selection!");
     }
     if (snapshot.val().one.selection !== "null" && snapshot.val().two.selection === "null") {
-      $("#p2-waiting").html("Player 1 is Waiting for you to Make a Selection!")
+      $("#p2-waiting").html("Player 1 is Waiting for you to Make a Selection!");
+    }
+    if (snapshot.val().one.selection === "null" && snapshot.val().two.selection === "null") {
+      $("#p1-waiting").html("Select Rock, Paper, or Scissors");
+      $("#p2-waiting").html("Select Rock, Paper, or Scissors");
+    }
+    if (snapshot.val().one.selection === "rock" && snapshot.val().two.selection === "rock") {
+      $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+    }
+    if (snapshot.val().one.selection === "paper" && snapshot.val().two.selection === "paper") {
+      $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+    }
+    if (snapshot.val().one.selection === "scissors" && snapshot.val().two.selection === "scissors") {
+      $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+    }
+    if (snapshot.val().one.selection === "rock" && snapshot.val().two.selection === "paper") {
+      $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+      $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+    }
+    if (snapshot.val().one.selection === "rock" && snapshot.val().two.selection === "scissors") {
+      $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+      $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+    }
+    if (snapshot.val().one.selection === "paper" && snapshot.val().two.selection === "rock") {
+      $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+      $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+    }
+    if (snapshot.val().one.selection === "paper" && snapshot.val().two.selection === "scissors") {
+      $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+      $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+    }
+    if (snapshot.val().one.selection === "scissors" && snapshot.val().two.selection === "rock") {
+      $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+      $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+    }
+    if (snapshot.val().one.selection === "scissors" && snapshot.val().two.selection === "paper") {
+      $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
+      $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
   }
 })
@@ -271,17 +315,16 @@ database.ref("players").on("value", function(snapshot) {
 database.ref("messages").orderByChild("date_added").on("child_added", function(snapshot) {
   console.log("messages", snapshot.val());
   console.log("")
-  // var shouldScroll = mContainer.scrollTop + mContainer.clientHeight === mContainer.scrollHeight;
   var playerMessage = "<div class='message'>" + snapshot.val().name + ": " + snapshot.val().message + "</div>";
   console.log("LOOK!!!!=>", playerMessage);
   $("#message-display").append(playerMessage);
-  // if (!shouldScroll) {}
   scrollToBottom();
 })
 
 $(document).on("click", "#p1-name-submit", function(event) {
   $("#p2-waiting").html("");
   $(".player-two").css("display", "none");
+  $(".banner").addClass("p1-banner");
   event.preventDefault();
   console.log("This Works!");
   var playerOneName = $("[name*='p1-name']").val().trim(); 
@@ -312,6 +355,7 @@ $(document).on("click", "#p1-name-submit", function(event) {
 $(document).on("click", "#p2-name-submit", function(event) {
   $("#p1-waiting").html("");
   $(".player-one").css("display", "none");
+  $(".banner").addClass("p2-banner");
   event.preventDefault();
   console.log("This Works!");
   var playerTwoName = $("[name*='p2-name']").val().trim(); 
@@ -340,45 +384,5 @@ $(document).on("click", "#p2-name-submit", function(event) {
 });
 
 
-
-
-
-// ----
-// database.ref("players/two").on("value", function(snapshot) {
-//   if (snapshot.exists()) {
-//     $("#p2-waiting").html("");
-//   } else {
-//     $("#p1-waiting").html("Waiting for 'Player 2'");
-//   }
-// })
-// ----
-
-// ----
-// database.ref(".info/connected").once("value", function(snapshot) {
-//   if (snapshot.val()) {
-//     var con = database.ref("connections").push({
-//       name: playerTwoName
-//     })
-//     con.onDisconnect().remove()
-//   }
-// })
-// ----
-
-// database.ref("players").onDisconnect().remove()
-
-// database.ref(".info/connected").on("value", function(snapshot) {
-
-//   console.log("snapshot.val()", snapshot.val());
-//   if (snapshot.val() == true) {
-//     database.ref("players").push({
-//       name: "Hooman"
-//     })
-//   } else {
-//     console.log("Not Connected")
-//   }
-// })
-
-// I need to come up with a plan to Structure my Data. 
-// https://firebase.google.com/docs/database/web/structure-data?authuser=1
 
 
