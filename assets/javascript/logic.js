@@ -149,7 +149,7 @@ function p1Selector() {
       $(document).on("click", "#p1-option", function(event) {
         $("figure").css("background-color", "");
         var selection = $(this);
-        $(this).css("background-color", "green");
+        $(this).css("background-color", "#478021");
         selection = selection[0].children[0].alt;
         console.log("selection", selection);
         database.ref("players/one").update({
@@ -175,7 +175,7 @@ function p2Selector() {
       $(document).on("click", "#p2-option", function(event) {
         $("figure").css("background-color", "");
         var selection = $(this);
-        $(this).css("background-color", "green");
+        $(this).css("background-color", "#478021");
         selection = selection[0].children[0].alt;
         console.log("selection", selection);
         database.ref("players/two").update({
@@ -214,6 +214,20 @@ database.ref("players/two").on("value", function(snapshot) {
     $("#p2-tie").html("0");
     $("#p2-loss").html("0");
     p2EnterName()
+  }
+})
+
+database.ref("players").on("value", function(snapshot) {
+  if (snapshot.exists() == false) {
+    database.ref("messages").remove(); 
+    $(".message-input").attr("disabled", "disabled");
+    $(".message-input").css("opacity", "0.5");
+    $("#message-submit").css("opacity", "0.5");
+    $("#message-display").css("opacity", "0.5");
+    $("#message-display").html("<div class='m-reject'>Who are you, player? Enter your name above to use 'Messenger.'</div>");
+    $(document).on("click", "#message-submit", function(event) {
+      event.preventDefault();
+    })
   }
 })
 
@@ -273,35 +287,65 @@ database.ref("players").on("value", function(snapshot) {
       $("#p2-waiting").html("Select Rock, Paper, or Scissors");
     }
     if (snapshot.val().one.selection === "rock" && snapshot.val().two.selection === "rock") {
+      $(".banner").css("background-color", "#FFD54A");
+      $(".banner").css("padding", "5px");
       $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "paper" && snapshot.val().two.selection === "paper") {
+      $(".banner").css("background-color", "#FFD54A");
+      $(".banner").css("padding", "5px");
       $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "scissors" && snapshot.val().two.selection === "scissors") {
+      $(".banner").css("background-color", "#FFD54A");
+      $(".banner").css("padding", "5px");
       $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "rock" && snapshot.val().two.selection === "paper") {
+      $(".p1-banner").css("background-color", "#D84C36");
+      $(".p1-banner").css("padding", "5px");
+      $(".p2-banner").css("background-color", "#8EFF42");
+      $(".p2-banner").css("padding", "5px");
       $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "rock" && snapshot.val().two.selection === "scissors") {
+      $(".p2-banner").css("background-color", "#D84C36");
+      $(".p2-banner").css("padding", "5px");
+      $(".p1-banner").css("background-color", "#8EFF42");
+      $(".p1-banner").css("padding", "5px");
       $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "paper" && snapshot.val().two.selection === "rock") {
+      $(".p2-banner").css("background-color", "#D84C36");
+      $(".p2-banner").css("padding", "5px");
+      $(".p1-banner").css("background-color", "#8EFF42");
+      $(".p1-banner").css("padding", "5px");
       $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "paper" && snapshot.val().two.selection === "scissors") {
+      $(".p1-banner").css("background-color", "#D84C36");
+      $(".p1-banner").css("padding", "5px");
+      $(".p2-banner").css("background-color", "#8EFF42");
+      $(".p2-banner").css("padding", "5px");
       $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "scissors" && snapshot.val().two.selection === "rock") {
+      $(".p1-banner").css("background-color", "#D84C36");
+      $(".p1-banner").css("padding", "5px");
+      $(".p2-banner").css("background-color", "#8EFF42");
+      $(".p2-banner").css("padding", "5px");
       $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "scissors" && snapshot.val().two.selection === "paper") {
+      $(".p2-banner").css("background-color", "#D84C36");
+      $(".p2-banner").css("padding", "5px");
+      $(".p1-banner").css("background-color", "#8EFF42");
+      $(".p1-banner").css("padding", "5px");
       $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
@@ -310,9 +354,8 @@ database.ref("players").on("value", function(snapshot) {
 
 database.ref("messages").orderByChild("date_added").on("child_added", function(snapshot) {
   console.log("messages", snapshot.val());
-  console.log("")
   var playerMessage = "<div class='message'>" + snapshot.val().name + ": " + snapshot.val().message + "</div>";
-  console.log("LOOK!!!!=>", playerMessage);
+  console.log("playerMessage", playerMessage);
   $("#message-display").append(playerMessage);
   scrollToBottom();
 })
@@ -321,6 +364,11 @@ $(document).on("click", "#p1-name-submit", function(event) {
   $("#p2-waiting").html("");
   $(".player-two").css("display", "none");
   $(".banner").addClass("p1-banner");
+  $(".m-reject").css("display", "none");
+  $(".message-input").removeAttr("disabled");
+  $(".message-input").css("opacity", "");
+  $("#message-submit").css("opacity", "");
+  $("#message-display").css("opacity", "");
   event.preventDefault();
   console.log("This Works!");
   var playerOneName = $("[name*='p1-name']").val().trim(); 
@@ -352,6 +400,11 @@ $(document).on("click", "#p2-name-submit", function(event) {
   $("#p1-waiting").html("");
   $(".player-one").css("display", "none");
   $(".banner").addClass("p2-banner");
+  $(".m-reject").css("display", "none");
+  $(".message-input").removeAttr("disabled");
+  $(".message-input").css("opacity", "");
+  $("#message-submit").css("opacity", "");
+  $("#message-display").css("opacity", "");
   event.preventDefault();
   console.log("This Works!");
   var playerTwoName = $("[name*='p2-name']").val().trim(); 

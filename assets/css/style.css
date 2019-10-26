@@ -38,7 +38,7 @@ h2 {
 }
 
 h3 {
-    color: green; 
+    color: #478021; 
     font-size: 1.2rem; 
 }
 
@@ -109,6 +109,12 @@ main {
 #message-submit:hover {
     background-color: #1A5991; 
     cursor: pointer; 
+}
+
+.m-reject {
+    background-color: #FFD54A;
+    text-align: center; 
+    padding: 10px; 
 }
 
 figure {
