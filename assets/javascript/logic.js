@@ -147,6 +147,7 @@ function p1Selector() {
     if (snapshot.exists()) {
       $("#player-one-name").html(snapshot.val().name);
       $(document).on("click", "#p1-option", function(event) {
+        $("figure").css("background-color", "");
         var selection = $(this);
         $(this).css("background-color", "green");
         selection = selection[0].children[0].alt;
@@ -163,12 +164,6 @@ function p1Selector() {
           }
         })
       })
-      // database.ref("players/one/selection").once("value", function(snapshot) {
-      //   if (snapshot.val() !== "null") {
-      //     console.log("cats")
-      //     $(document).off("click", "#p1-option")
-      //   }
-      // })
     }
   })
 }
@@ -178,6 +173,7 @@ function p2Selector() {
     if (snapshot.exists()) {
       $("#player-two-name").html(snapshot.val().name);
       $(document).on("click", "#p2-option", function(event) {
+        $("figure").css("background-color", "");
         var selection = $(this);
         $(this).css("background-color", "green");
         selection = selection[0].children[0].alt;
