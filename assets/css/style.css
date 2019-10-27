@@ -2,17 +2,11 @@
     box-sizing: border-box; 
 }
 
-input, textarea {
-    -webkit-appearance: none;
-    border-radius: 0;
-}
-
 body {
-    background-color: #D9D9D9;
+    background-color: #FFFAFC; 
 }
 
 .container {
-    border: 1px dashed blue; 
     width: 80%;
     margin: 0 auto; 
 }
@@ -25,18 +19,12 @@ body {
 }
 
 header {
-    border: 1px dashed red; 
     display: inline-block; 
     font-size: 3.9rem;
     font-family: 'Fascinate Inline', cursive;
     text-align: right; 
     vertical-align: bottom; 
-    /* padding: 5px; */
-    /* text-shadow: 2px 2px 5px white; */
-}
-
-li {
-    border: 1px solid green; 
+    text-shadow: 0 2px 5px #FFFAFC;
 }
 
 h2 {
@@ -50,14 +38,12 @@ h3 {
 }
 
 main {
-    border: 1px solid black;
     display: block; 
 }
 
 .player-one,
 .player-two {
-    border: 1px solid black;
-    padding: 5px;  
+    padding: 10px 5px 5px 5px;
     display: inline-block; 
     text-align: right; 
 
@@ -157,19 +143,17 @@ img {
 
 
 section {
-    border: 1px dashed purple; 
     display: block; 
     font-family: 'Teko', sans-serif;
+    overflow: auto; 
 }
 
 .scoreboard {
-    border: 1px solid black; 
-    /* padding: 5px;  */
     font-size: 2rem; 
     display: inline-block; 
     text-align: right; 
     vertical-align: top; 
-    width: 288px; 
+    width: 283px; 
 }
 
 table {
@@ -219,10 +203,9 @@ tr.middle-row td {
 }
 
 .chat-box {
-    border: 1px solid black; 
-    padding: 0 5px 5px 5px; 
+    padding: 0 5px 20px 5px; 
     display: inline-block;  
-    width: 741px; 
+    width: 738px; 
     font-family: 'Dosis', sans-serif;
 }
 
@@ -244,7 +227,6 @@ tr.middle-row td {
     border-bottom: 2px solid black; 
     width: 90%;
     text-align: left; 
-    padding: 5px; 
 }
 
 .message-input:focus {
@@ -258,7 +240,6 @@ tr.middle-row td {
     border-top-right-radius: 0;
     border-bottom: 2px solid black; 
     width: 10%; 
-    padding: 5px;
 }
 
 @media screen and (max-width: 1295px) {
@@ -288,7 +269,7 @@ tr.middle-row td {
     }
     .player-one,
     .player-two {
-        width: 80%; 
+        width: 100%; 
         text-align: center; 
     }
     section {
@@ -299,7 +280,6 @@ tr.middle-row td {
         text-align: center; 
         width: 80%;
         padding: 0; 
-        /* text-align: center;  */
     }
     table {
         float: none; 
@@ -311,14 +291,20 @@ tr.middle-row td {
     }
     .chat-box {
         display: inline-block; 
-        width: 100%; 
-        padding: 0;
+        width: 80%; 
+        padding: 0; 
     }
+
 }
 
 @media screen and (max-width: 640px) {
     header {
         font-size: 2rem; 
+    }
+    .scoreboard,
+    .chat-box {
+        width: 100%; 
+        padding: 0; 
     }
 }
 
