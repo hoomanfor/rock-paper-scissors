@@ -113,6 +113,8 @@ main {
 
 .m-reject {
     background-color: #FFD54A;
+    border: 1px solid #806A25; 
+    border-radius: 3px;
     text-align: center; 
     padding: 10px; 
 }
@@ -145,6 +147,7 @@ section {
 
 .scoreboard {
     border: 1px solid black; 
+    padding: 5px; 
     font-size: 2rem; 
     display: inline-block; 
     text-align: right; 
@@ -154,19 +157,42 @@ section {
 
 table {
     background-color: white; 
-    display: inline-block; 
-    text-align: right; 
+    border-collapse: separate;
+    border: 2px solid black; 
+    vertical-align: bottom; 
+    border-radius: 3px; 
     font-size: 1.5rem; 
+    float: right; 
+    /* width: 68%;  */
 }
 
-th,
+th {
+    padding: 10px 5px 5px 5px; 
+
+}
+
 td {
-    border: 1px solid black; 
-    padding: .2rem;
+    vertical-align: bottom; 
+    padding: 0 5px 5px 5px; 
 }
 
 .numbers {
     text-align: center; 
+}
+
+.win {
+    background-color: #8EFF42;
+    width: 40px; 
+}
+
+.loss {
+    background-color: #D84C36;
+    width: 40px; 
+}
+
+.tie {
+    background-color: #FFD54A;
+    width: 40px; 
 }
 
 .m-header {
@@ -176,6 +202,7 @@ td {
 
 .chat-box {
     border: 1px solid black; 
+    padding: 5px; 
     display: inline-block;  
     width: 696px; 
     font-family: 'Dosis', sans-serif;
@@ -183,7 +210,10 @@ td {
 
 #message-display {
     background-color: white;
-    border: 1px solid black; 
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border: 2px solid black; 
+    border-bottom: 1px solid black;
     padding: 5px; 
     height: 200px; 
     text-align: left; 
@@ -191,13 +221,25 @@ td {
 }
 
 .message-input {
+    border-top-left-radius: 0;
+    border-left: 2px solid black; 
+    border-bottom: 2px solid black; 
     width: 90%;
     text-align: left; 
 }
 
 #message-submit {
+    border-top-right-radius: 0;
+    border-bottom: 2px solid black; 
     width: 10%; 
 }
+
+/* Banner Colors
+----
+yellow: #FFD54A;
+red: #D84C36;
+green: #8EFF42;
+---- */
 
 /* Google Fonts
 ----
