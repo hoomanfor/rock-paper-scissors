@@ -224,6 +224,7 @@ database.ref("players").on("value", function(snapshot) {
     $(".message-input").css("opacity", "0.5");
     $("#message-submit").css("opacity", "0.5");
     $("#message-display").css("opacity", "0.5");
+    $("table").css("opacity", "0.5");
     $("#message-display").html("<div class='m-reject'>Who are you, player? Enter your name above to use 'Messenger.'</div>");
     $(document).on("click", "#message-submit", function(event) {
       event.preventDefault();
@@ -289,16 +290,19 @@ database.ref("players").on("value", function(snapshot) {
     if (snapshot.val().one.selection === "rock" && snapshot.val().two.selection === "rock") {
       $(".banner").css("background-color", "#FFD54A");
       $(".banner").css("padding", "5px");
+      $(".banner").css("border", "1px solid #806A25");
       $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "paper" && snapshot.val().two.selection === "paper") {
       $(".banner").css("background-color", "#FFD54A");
       $(".banner").css("padding", "5px");
+      $(".banner").css("border", "1px solid #806A25");
       $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "scissors" && snapshot.val().two.selection === "scissors") {
       $(".banner").css("background-color", "#FFD54A");
       $(".banner").css("padding", "5px");
+      $(".banner").css("border", "1px solid #806A25");
       $(".banner").html("Tie! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
     if (snapshot.val().one.selection === "rock" && snapshot.val().two.selection === "paper") {
@@ -306,6 +310,8 @@ database.ref("players").on("value", function(snapshot) {
       $(".p1-banner").css("padding", "5px");
       $(".p2-banner").css("background-color", "#8EFF42");
       $(".p2-banner").css("padding", "5px");
+      $(".p1-banner").css("border", "1px solid #802D20");
+      $(".p2-banner").css("border", "1px solid #478021");
       $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
@@ -314,6 +320,8 @@ database.ref("players").on("value", function(snapshot) {
       $(".p2-banner").css("padding", "5px");
       $(".p1-banner").css("background-color", "#8EFF42");
       $(".p1-banner").css("padding", "5px");
+      $(".p1-banner").css("border", "1px solid #478021");
+      $(".p2-banner").css("border", "1px solid #802D20");
       $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
@@ -322,6 +330,8 @@ database.ref("players").on("value", function(snapshot) {
       $(".p2-banner").css("padding", "5px");
       $(".p1-banner").css("background-color", "#8EFF42");
       $(".p1-banner").css("padding", "5px");
+      $(".p1-banner").css("border", "1px solid #478021");
+      $(".p2-banner").css("border", "1px solid #802D20");
       $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
@@ -330,6 +340,8 @@ database.ref("players").on("value", function(snapshot) {
       $(".p1-banner").css("padding", "5px");
       $(".p2-banner").css("background-color", "#8EFF42");
       $(".p2-banner").css("padding", "5px");
+      $(".p1-banner").css("border", "1px solid #802D20");
+      $(".p2-banner").css("border", "1px solid #478021");
       $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
@@ -338,6 +350,8 @@ database.ref("players").on("value", function(snapshot) {
       $(".p1-banner").css("padding", "5px");
       $(".p2-banner").css("background-color", "#8EFF42");
       $(".p2-banner").css("padding", "5px");
+      $(".p1-banner").css("border", "1px solid #802D20");
+      $(".p2-banner").css("border", "1px solid #478021");
       $(".p1-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
@@ -346,6 +360,8 @@ database.ref("players").on("value", function(snapshot) {
       $(".p2-banner").css("padding", "5px");
       $(".p1-banner").css("background-color", "#8EFF42");
       $(".p1-banner").css("padding", "5px");
+      $(".p1-banner").css("border", "1px solid #478021");
+      $(".p2-banner").css("border", "1px solid #802D20");
       $(".p1-banner").html("You Won! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
       $(".p2-banner").html("You Lost! " + snapshot.val().one.name + " selected " + snapshot.val().one.selection + ". " + snapshot.val().two.name + " selected " + snapshot.val().two.selection + ".");
     }
@@ -369,6 +385,7 @@ $(document).on("click", "#p1-name-submit", function(event) {
   $(".message-input").css("opacity", "");
   $("#message-submit").css("opacity", "");
   $("#message-display").css("opacity", "");
+  $("table").css("opacity", "");
   event.preventDefault();
   console.log("This Works!");
   var playerOneName = $("[name*='p1-name']").val().trim(); 
@@ -405,6 +422,7 @@ $(document).on("click", "#p2-name-submit", function(event) {
   $(".message-input").css("opacity", "");
   $("#message-submit").css("opacity", "");
   $("#message-display").css("opacity", "");
+  $("table").css("opacity", "");
   event.preventDefault();
   console.log("This Works!");
   var playerTwoName = $("[name*='p2-name']").val().trim(); 

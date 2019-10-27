@@ -22,10 +22,12 @@ body {
 header {
     border: 1px dashed red; 
     display: inline-block; 
-    font-size: 4rem;
+    font-size: 3.9rem;
     font-family: 'Fascinate Inline', cursive;
     text-align: right; 
-    text-shadow: 2px 2px 5px white;
+    vertical-align: bottom; 
+    /* padding: 5px; */
+    /* text-shadow: 2px 2px 5px white; */
 }
 
 li {
@@ -45,12 +47,12 @@ h3 {
 main {
     border: 1px solid black;
     display: block; 
-    text-align: left; 
 }
 
 .player-one,
 .player-two {
-    border: 1px solid black; 
+    border: 1px solid black;
+    padding: 5px;  
     display: inline-block; 
     text-align: right; 
 
@@ -64,7 +66,7 @@ main {
 .player-form {
     font-size: 1.3rem;
     font-family: 'Dosis', sans-serif;
-    padding: 5px 5px 5px 5px; 
+    padding: 0 0 5px 0; 
 }
 
 .input-container {
@@ -120,12 +122,17 @@ main {
 }
 
 figure {
-    border: 1px solid black;
+    border: 2px solid black;
+    border-radius: 3px; 
     background-color: white;
     display: inline-block; 
     cursor: pointer;
     margin: 0; 
     padding: 5px; 
+}
+
+figure:hover {
+    background-color: #478021; 
 }
 
 figcaption {
@@ -138,6 +145,11 @@ figcaption {
     text-align: center; 
 }
 
+img {
+    border: 1px solid black; 
+    border-radius: 3px; 
+}
+
 
 section {
     border: 1px dashed purple; 
@@ -147,12 +159,12 @@ section {
 
 .scoreboard {
     border: 1px solid black; 
-    padding: 5px; 
+    /* padding: 5px;  */
     font-size: 2rem; 
     display: inline-block; 
     text-align: right; 
     vertical-align: top; 
-    width: 294px; 
+    width: 288px; 
 }
 
 table {
@@ -172,6 +184,10 @@ th {
 
 td {
     padding: 2px 5px 0px 5px; 
+}
+
+tr.middle-row td {
+    border-bottom: 1px solid black; 
 }
 
 .win {
@@ -199,9 +215,9 @@ td {
 
 .chat-box {
     border: 1px solid black; 
-    padding: 5px; 
+    padding: 0 5px 5px 5px; 
     display: inline-block;  
-    width: 696px; 
+    width: 741px; 
     font-family: 'Dosis', sans-serif;
 }
 
@@ -223,12 +239,82 @@ td {
     border-bottom: 2px solid black; 
     width: 90%;
     text-align: left; 
+    padding: 5px; 
+}
+
+.message-input:focus {
+    box-shadow: 0 0 5px #1A5991;
+    border-bottom: 2px solid #1A5991; 
+    border-left: 2px solid #1A5991;
+    outline: none
 }
 
 #message-submit {
     border-top-right-radius: 0;
     border-bottom: 2px solid black; 
     width: 10%; 
+    padding: 5px;
+}
+
+@media screen and (max-width: 1295px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1152px) {
+    .container {
+        width: 100%;
+        text-align: center; 
+    }
+}
+
+@media screen and (max-width: 1036px) {
+    header {
+        display: block; 
+        font-size: 2.4rem;
+        font-family: 'Fascinate Inline', cursive;
+        text-align: center; 
+        vertical-align: bottom; 
+        overflow: auto; 
+    }
+    li {
+        display: inline; 
+    }
+    .player-one,
+    .player-two {
+        width: 80%; 
+        text-align: center; 
+    }
+    section {
+        text-align: center;
+    }
+    .scoreboard {
+        display: inline-block; 
+        text-align: center; 
+        width: 80%;
+        padding: 0; 
+        /* text-align: center;  */
+    }
+    table {
+        float: none; 
+        text-align: center; 
+        width: 100%; 
+    }
+    td {
+        width: 25%; 
+    }
+    .chat-box {
+        display: inline-block; 
+        width: 100%; 
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    header {
+        font-size: 2rem; 
+    }
 }
 
 /* Banner Colors
