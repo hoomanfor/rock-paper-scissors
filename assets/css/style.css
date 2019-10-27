@@ -158,8 +158,7 @@ section {
 table {
     background-color: white; 
     border-collapse: separate;
-    border: 2px solid black; 
-    vertical-align: bottom; 
+    border: 2px solid black;
     border-radius: 3px; 
     font-size: 1.5rem; 
     float: right; 
@@ -167,31 +166,29 @@ table {
 }
 
 th {
-    padding: 10px 5px 5px 5px; 
-
+    padding: 5px 5px 0 5px;
+    border-bottom: 1px solid black; 
 }
 
 td {
-    vertical-align: bottom; 
-    padding: 0 5px 5px 5px; 
-}
-
-.numbers {
-    text-align: center; 
+    padding: 2px 5px 0px 5px; 
 }
 
 .win {
     background-color: #8EFF42;
+    text-align: center; 
     width: 40px; 
 }
 
 .loss {
     background-color: #D84C36;
+    text-align: center; 
     width: 40px; 
 }
 
 .tie {
     background-color: #FFD54A;
+    text-align: center; 
     width: 40px; 
 }
 
